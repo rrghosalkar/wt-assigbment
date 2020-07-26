@@ -1,0 +1,160 @@
+<html>
+<head>
+ <link href="css/bootstrap.min.css" rel="stylesheet">
+        <script src="js/jquery.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>form</title>
+<style>
+#bg{
+font-size:80px;
+color:tomato;
+}
+
+
+</style>
+</head>
+<body>
+<div id="bg"><br>
+<center>MARRIAGE</center><br>
+
+</div>
+				<div class="container-fluid">
+                <div class="row">
+					<div class="col-md-6"><img src="image1.jpg" width="700" height="700"></div>
+                    <div class="col-md-6">
+                        <div class="panel panel-primary" >
+                            <div class="panel-heading">
+                               <center> <h4>We loved with a love that was more than love</h4></center>
+                            </div>
+							<div class="panel-body">
+							<form>
+									<div class="form-group">
+										<label for="Name">Name</label>
+                                        <input type="text" class="form-control" name="Name" id="Name" required>
+                                    </div>
+									
+									<div class="form-group">
+										<label for="mobileNo">Contact Number</label>
+                                        <input type="text" class="form-control" name="mobileNo" id="mobileNo" required>
+                                    </div>
+									
+									<div class="form-group">
+									  <label for="Address">Location:</label>
+									  <textarea class="form-control" rows="5" id="address" required></textarea>
+									</div>
+																	
+									<div class="form-group">
+										<label for="emailId">Email Id</label>
+                                        <input type="email" class="form-control" name="emailId" id="emailId" required>
+                                    </div>
+							
+									<div class="form-group">
+										<label for="dob">Date of Birth</label>
+                                        <input type="date" class="form-control" name="dob" id="dob" required>
+                                    </div>
+									
+								<h3>Types</h3>
+								<div class="radio">
+								  <label><input type="radio" name="optradio" id="optradio"  value="Marriage Event" >Classic Marriage </label>
+								</div>
+								<div class="radio">
+								  <label><input type="radio" name="optradio" id="optradio"  value="Birthday Event">Western Marriage</label>
+								</div>
+								<div class="radio">
+								  <label><input type="radio" name="optradio" id="optradio"  value="Party Event">The way you like!</label>
+								</div>
+								<br>
+								<h3>Menu</h3>
+
+								 <div class="checkbox">
+									  <label><input type="checkbox" name="check[]" id="optcheckbox" value="Thali" >Thali</label>
+									</div>
+									<div class="checkbox">
+									  <label><input type="checkbox" name="check[]" id="optcheckbox" value="Snacks">Snacks</label>
+									</div>
+									<div class="checkbox ">
+									  <label><input type="checkbox"  name="check[]" id="optcheckbox" value="Drinks">Drinks</label>
+									</div>
+									<div class="checkbox ">
+									  <label><input type="checkbox" name="check[]" id="optcheckbox"  value="Icecreams">Sweets</label>
+									</div>
+									<br>
+									<div class="form-group">
+									<h3>Select Budget</h3>
+									  <select class="form-control" id="sel1" required>
+										<option>1-3 lakh</option>
+										<option>3-6lakh</option>
+										<option>7-10lakh</option>
+										<option>More than 10 lakh</option>
+									  </select><br><br>	
+									<div id="msg">
+										<pre></pre>
+									</div>
+																			
+											<center><button type="submit" name="submit" id="btn" class="btn btn-primary">Submit</button></center>													
+								       </div>
+									</form>
+							</div>
+					</div>
+					
+				</div>
+			</div>
+			<div class="row">
+				<table id="display" border="2px" class="table table-bordered">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Mobile No</th>
+						<th>Address</th>
+						<th>Email</th>
+						<th>DOB</th>
+						<th>Event</th>
+						<th>Food</th>
+						<th>Budget</th>
+					</tr>
+				</thead>
+				</table>
+				<script src="script.js"></script>
+			</div>
+		</div>
+
+
+
+    
+    <script>
+        let details = [];
+        // example {id:1592304983049, title: 'Deadpool', year: 2015}
+        const adddetail = (ev)=>{
+            ev.preventDefault();  //to stop the form submitting
+            let detail = {
+                
+                Name: document.getElementById('Name').value,
+                MobileNo: document.getElementById('mobileNo').value,
+				address: document.getElementById('address').value,
+				email: document.getElementById('emailId').value,
+				dob: document.getElementById('dob').value,
+				event: document.getElementById('optradio').value,
+				food: document.getElementById('optcheckbox').value,
+				budget: document.getElementById('sel1').value,
+						
+            }
+				details.push(detail);
+				document.forms[0].reset(); // to clear the form for the next entries
+            //document.querySelector('form').reset();
+
+            //for display purposes only
+            console.warn('added' , {details} );
+            let pre = document.querySelector('#msg pre');
+            pre.textContent = '\n' + JSON.stringify(details, '\t', 2);
+
+            //saving to localStorage
+            localStorage.setItem('MydetailList', JSON.stringify(details) );
+        }
+        document.addEventListener('DOMContentLoaded', ()=>{
+            document.getElementById('btn').addEventListener('click', adddetail);
+        });
+    </script>
+
+</body>
+</html>
